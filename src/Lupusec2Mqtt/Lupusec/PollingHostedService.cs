@@ -149,12 +149,10 @@ namespace Lupusec2Mqtt.Lupusec
 
             foreach (var powerSwitch in powerSwitchList.PowerSwitches)
             {
-                var device = _conversionService.GetStateProvider(powerSwitch);
-
-                if (device.HasValue)
+                var stateProviders = _conversionService.GetStateProvider(powerSwitch);
+                foreach (var stateProvider in stateProviders)
                 {
-                    _mqttService.Publish(device.Value.Device.StateTopic, device.Value.Device.State);
-                    if (device.Value.SwitchPowerSensor != null) { _mqttService.Publish(device.Value.SwitchPowerSensor.StateTopic, device.Value.SwitchPowerSensor.State); }
+                    _mqttService.Publish(stateProvider.StateTopic, stateProvider.State);
                 }
             }
         }

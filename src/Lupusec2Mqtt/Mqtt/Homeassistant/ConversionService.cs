@@ -89,18 +89,24 @@ namespace Lupusec2Mqtt.Mqtt.Homeassistant
             }
         }
 
-        public (IStateProvider Device, IStateProvider SwitchPowerSensor)? GetStateProvider(PowerSwitch powerSwitch)
+        public IEnumerable<IStateProvider> GetStateProvider(PowerSwitch powerSwitch)
         {
+            List<IStateProvider> list = new List<IStateProvider>();
             switch (powerSwitch.Type)
             {
                 case 48:
-                    return (Device: new Switch(_configuration, powerSwitch), SwitchPowerSensor: new SwitchPowerSensor(_configuration, powerSwitch));
+                    list.Add(new Switch(_configuration, powerSwitch));
+                    list.Add(new SwitchPowerSensor(_configuration, powerSwitch));
+                    list.Add(new SwitchEnergySensor(_configuration, powerSwitch));
+                    return list;
                 case 74:
-                    return (Device: new Light(_configuration, powerSwitch), SwitchPowerSensor: null);
+                    list.Add(new Light(_configuration, powerSwitch));
+                    return list;
                 case 57: // Nuki
-                    return (Device: new Switch(_configuration, powerSwitch), SwitchPowerSensor: null);
+                    list.Add(new Switch(_configuration, powerSwitch));
+                    return list;
                 default:
-                    return null;
+                    return list;
             }
 
         }
