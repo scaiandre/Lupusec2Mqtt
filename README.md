@@ -8,6 +8,7 @@ The repository is: https://github.com/CyberDNS/hassio-addons-repository
 The docker image isn't anymore maintained, you can create your own docker image if needed (Dockerfile is still present in this project), otherwise if you are using Homeassistant, please migrate to my addon repository (link above).
 
 ## Tested with
+- XT1 Plus
 - XT2
 - XT2 Plus
 
@@ -17,4 +18,5 @@ The docker image isn't anymore maintained, you can create your own docker image 
 - Burglar Alarm state (config, state)
 - Open/Close contacts (config, state)
 - Movement detector (config, state)
+- Power switch (config, state, set, consumption)
 - Smoke detector (config)
