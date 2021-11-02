@@ -149,9 +149,12 @@ namespace Lupusec2Mqtt.Lupusec
 
             foreach (var powerSwitch in powerSwitchList.PowerSwitches)
             {
+                _logger.LogDebug("Checking {powerSwitch}", powerSwitch.Name);
                 var stateProviders = _conversionService.GetStateProvider(powerSwitch);
+                _logger.LogDebug("Received {countstateProviders}", stateProviders.Count());
                 foreach (var stateProvider in stateProviders)
                 {
+                    _logger.LogDebug("Publish {name} with state {state}", stateProvider.Name, stateProvider.State);
                     _mqttService.Publish(stateProvider.StateTopic, stateProvider.State);
                 }
             }
