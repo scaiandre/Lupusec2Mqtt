@@ -13,6 +13,9 @@ namespace Lupusec2Mqtt.Mqtt.Homeassistant.Devices
     {
         protected readonly PowerSwitch _powerSwitch;
 
+        [JsonProperty("device_class")]
+        public string DeviceClass { get; set; }
+
         [JsonProperty("state_topic")]
         public string StateTopic => EscapeTopic($"homeassistant/{_component}/lupusec/{UniqueId}/state");
 
@@ -43,6 +46,12 @@ namespace Lupusec2Mqtt.Mqtt.Homeassistant.Devices
 
             UniqueId = $"{_powerSwitch.Id}_energy";
             Name = GetValue(nameof(Name), $"{_powerSwitch.Name} - Energy");
+            DeviceClass = GetValue(nameof(DeviceClass), GetDeviceClassDefaultValue());
+        }
+
+        private string GetDeviceClassDefaultValue()
+        {
+            return "energy";
         }
     }
 }
