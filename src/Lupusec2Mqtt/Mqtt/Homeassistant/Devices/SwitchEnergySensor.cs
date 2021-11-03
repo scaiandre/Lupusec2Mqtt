@@ -19,6 +19,9 @@ namespace Lupusec2Mqtt.Mqtt.Homeassistant.Devices
         [JsonProperty("unit_of_measurement")]
         public string UnitOfMeasurement => "kWh";
 
+        [JsonProperty("state_class")]
+        public string StateClass => "total";
+
         [JsonIgnore]
         public string State => GetState();
 
