@@ -45,6 +45,9 @@ namespace Lupusec2Mqtt.Mqtt.Homeassistant
             List<IDevice> list = new List<IDevice>();
             switch (powerSwitch.Type)
             {
+                case 24:
+                    list.Add(new Switch(_configuration, powerSwitch));
+                    return list;
                 case 48:
                     list.Add(new Switch(_configuration, powerSwitch));
                     list.Add(new SwitchPowerSensor(_configuration, powerSwitch));
