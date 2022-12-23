@@ -29,7 +29,7 @@ namespace Lupusec2Mqtt
 
             try
             {
-                Log.Information("Lupusec2Mqtt-SCAI is starting up...");
+                Log.Information("Lupusec2Mqtt is starting up...");
 
                 CreateHostBuilder(args).Build().Run();
 
